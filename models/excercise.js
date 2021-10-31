@@ -1,25 +1,34 @@
-const {} = require('sequelize');
+const mongoose = require('mongoose');
 
-Excercise.init({
-  //   type: 'resistance',
+const Schema = mongoose.Schema;
+
+const ExerciseSchema = new Schema({
+  type: {
+    type: String,
+    enum: ['cardio', 'resistance'],
+  },
   name: {
-    type: DataType.STRING,
+    type: String,
     allownull: false,
   },
   duration: {
-    type: DataType.INTEGER,
+    type: Number,
     allownull: false,
   },
   weight: {
-    type: DataType.INTEGER,
-    allownull: false,
+    type: Number,
   },
   reps: {
-    type: DataType.INTEGER,
-    allownull: false,
+    type: Number,
   },
   sets: {
-    type: DataType.INTEGER,
-    allownull: false,
+    type: Number,
+  },
+  distance: {
+    type: Number,
   },
 });
+
+const Exercise = mongoose.model('Exercise', ExerciseSchema);
+
+module.exports = Exercise;
