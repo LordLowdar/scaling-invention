@@ -34,4 +34,14 @@ router.put('/workouts/:id', async (req, res) => {
     res.status(500);
   }
 });
+
+router.get('/workouts/range', async (req, res) => {
+  try {
+    const range = await workout.find();
+    res.status(200).send(range);
+  } catch (error) {
+    res.status(500);
+  }
+});
+
 module.exports = router;
