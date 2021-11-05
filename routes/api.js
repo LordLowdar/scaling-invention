@@ -3,7 +3,9 @@ const workout = require('../models/workout');
 
 router.get('/workouts', async (req, res) => {
   try {
-    const recent = await workout.find();
+    const recent = await workout.aggregate([
+      { $addFields: { totalDuration: { $sum: '$exercises.duration' } } },
+    ]);
     console.log(workout);
     res.status(200).send(recent);
   } catch (err) {
@@ -37,7 +39,9 @@ router.put('/workouts/:id', async (req, res) => {
 
 router.get('/workouts/range', async (req, res) => {
   try {
-    const range = await workout.find();
+    const range = await workout.aggregate([
+      { $addFields: { totalDuration: { $sum: '$exercises.duration' } } },
+    ]);
     res.status(200).send(range);
   } catch (error) {
     res.status(500);
